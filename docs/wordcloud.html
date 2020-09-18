@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="d3.layout.cloud.js"></script>
+<style type="text/css"></style>
+
+ <div id="home" class="button_cont" align="center"><a class="example_e" href="add-website-here" target="_blank" rel="nofollow noopener">Home</a></div>
+
+
+
+<script type="text/javascript">
+    document.getElementById("home").onclick = function () {
+        location.href = "index.html";
+    };
+</script>
+
+<style>
+
+    body {
+      background-image: url('background1.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      text-align: center;
+      font-family: 'Verdana',sans-serif
+    }
+    .legend {
+        border: 1px solid #555555;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 0.8em;
+        margin: 10px;
+        padding: 8px;
+    }
+    .bld {
+        font-weight: bold;
+    }
+
+    .example_e {
+        background: #191919;
+        border: 1px double #cccccc;
+        color: #eeeeee;
+        font-size: 21px;
+        font-family: sans-serif;
+        font-weight: 500;
+        padding: 6px;
+        width: 150px;
+        text-transform: uppercase;
+        border-radius: 30px;
+        display: inline-block;
+        transition: all 0.3s ease 0s;
+        margin: 5px;
+        }
+
+    .example_e:hover {
+        color: #404040 ;
+        font-weight: 700 ;
+        letter-spacing: 3px;
+        background: white;
+        -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        transition: all 0.3s ease 0s;
+        }
+        
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 10px;
+        background: green;
+        color: white;
+        border-radius: 5px;
+        pointer-events: none;
+        }  
+</style>
+<body>
+    <h2 style="color: white; font-size: 30px;">	
+      Popular Words in 130,663 Top Songs' Names (2010-2019)
+      </h2>
+  </body>
+  <script>
+  
+      var frequency_list = [{"text":"I","size":5896},{"text":"You","size":4925},{"text":"Me","size":4109},{"text":"It","size":2702},{"text":"Love","size":2623},{"text":"My","size":2517},{"text":"All","size":1204},{"text":"Don't","size":1178},{"text":"Your","size":1132},{"text":"Piano","size":1071},{"text":"State","size":977},{"text":"Sonata","size":974},{"text":"Trance","size":944},{"text":"Concerto","size":933},{"text":"Time","size":924},{"text":"One","size":915},{"text":"Like","size":859},{"text":"This","size":852},{"text":"Flat","size":842},{"text":"Original","size":832},{"text":"We","size":827},{"text":"Go","size":778},{"text":"Back","size":770},{"text":"What","size":720},{"text":"Acoustic","size":703},{"text":"That","size":702},{"text":"Instrumental","size":698},{"text":"Can","size":697},{"text":"Rain","size":694},{"text":"Night","size":692},{"text":"Let","size":686},{"text":"Life","size":670},{"text":"Act","size":668},{"text":"Do","size":667},{"text":"Get","size":614},{"text":"Song","size":613},{"text":"Good","size":606},{"text":"Way","size":599},{"text":"Not","size":571},{"text":"Know","size":569},{"text":"Prelude","size":562},{"text":"Never","size":561},{"text":"Day","size":547},{"text":"Man","size":547},{"text":"Violin","size":544},{"text":"Radio","size":533},{"text":"Now","size":485},{"text":"Baby","size":483},{"text":"Que","size":478},{"text":"World","size":476},{"text":"Home","size":456},{"text":"New","size":452},{"text":"Heart","size":451},{"text":"Take","size":447},{"text":"Sleep","size":441},{"text":"Andante","size":438},{"text":"Remastered","size":436},{"text":"Come","size":430},{"text":"Die","size":429},{"text":"Book","size":421},{"text":"Just","size":416},{"text":"Light","size":413},{"text":"Symphony","size":412},{"text":"Music","size":411},{"text":"Away","size":404},{"text":"Variations","size":404},{"text":"When","size":402},{"text":"Track","size":399},{"text":"How","size":396},{"text":"Little","size":396},{"text":"Bad","size":392},{"text":"Blue","size":392},{"text":"Intro","size":391},{"text":"Want","size":391},{"text":"Well","size":390},{"text":"More","size":382},{"text":"from","size":380},{"text":"Sounds","size":378},{"text":"Black","size":376},{"text":"Got","size":373},{"text":"Again","size":365},{"text":"2018","size":362},{"text":"Lil","size":358},{"text":"Over","size":358},{"text":"Here","size":357},{"text":"God","size":353},{"text":"High","size":348},{"text":"Passion","size":348},{"text":"Dance","size":347},{"text":"Fire","size":342},{"text":"If","size":342},{"text":"Too","size":342},{"text":"Will","size":342},{"text":"Mind","size":341},{"text":"Right","size":341},{"text":"Only","size":340},{"text":"Amor","size":337},{"text":"Say","size":335},{"text":"Money","size":332},{"text":"Clavier","size":328},{"text":"Tempered","size":325},{"text":"Feel","size":324},{"text":"Girl","size":321},{"text":"Make","size":317},{"text":"Lost","size":316},{"text":"Long","size":314},{"text":"Last","size":312},{"text":"Dream","size":309},{"text":"Theme","size":309},{"text":"Christmas","size":303},{"text":"Big","size":302},{"text":"About","size":299},{"text":"Young","size":299},{"text":"There","size":296},{"text":"Real","size":295},{"text":"String","size":295},{"text":"Better","size":293},{"text":"White","size":290},{"text":"Us","size":287},{"text":"Call","size":284},{"text":"Forever","size":284},{"text":"Coming","size":280},{"text":"Boy","size":276},{"text":"Need","size":275},{"text":"Quartet","size":274},{"text":"City","size":273},{"text":"Interlude","size":273},{"text":"Cello","size":272},{"text":"Stay","size":272},{"text":"Alone","size":271},{"text":"Where","size":271},{"text":"Still","size":267},{"text":"Run","size":265},{"text":"Eyes","size":263},{"text":"Days","size":260},{"text":"Waves","size":260},{"text":"Dreams","size":259},{"text":"Extended","size":259},{"text":"Water","size":259},{"text":"Fall","size":258},{"text":"Summer","size":258},{"text":"See","size":257},{"text":"Red","size":253},{"text":"Moon","size":250},{"text":"Partita","size":248},{"text":"Who","size":248},{"text":"Off","size":247},{"text":"Dark","size":245},{"text":"Nothing","size":245},{"text":"Soul","size":245},{"text":"Cut","size":243},{"text":"Hold","size":243},{"text":"Keep","size":243},{"text":"Noise","size":243},{"text":"Sound","size":243},{"text":"King","size":242},{"text":"She","size":242},{"text":"Recorded","size":241},{"text":"Deep","size":233},{"text":"End","size":233},{"text":"Wild","size":232},{"text":"First","size":229},{"text":"Club","size":226},{"text":"Cold","size":226},{"text":"Gone","size":226},{"text":"Old","size":226},{"text":"House","size":224},{"text":"Beautiful","size":223},{"text":"Morning","size":221},{"text":"Give","size":215},{"text":"Look","size":215},{"text":"Something","size":215},{"text":"Sun","size":215},{"text":"Everything","size":213},{"text":"Mixed","size":213},{"text":"Ocean","size":209},{"text":"After","size":208},{"text":"Have","size":208},{"text":"Why","size":208},{"text":"Rock","size":206},{"text":"Tell","size":203},{"text":"Friends","size":202},{"text":"Was","size":202},{"text":"Recap","size":201},{"text":"Party","size":200},{"text":"Jesus","size":199},{"text":"Talk","size":199},{"text":"Binaural","size":198},{"text":"Goldberg","size":197},{"text":"Body","size":195},{"text":"Name","size":195},{"text":"Star","size":195},{"text":"Sky","size":194},{"text":"Trio","size":194},{"text":"Free","size":192},{"text":"Gold","size":192},{"text":"Heaven","size":190},{"text":"ll","size":190},{"text":"Two","size":189},{"text":"Game","size":188},{"text":"Around","size":187},{"text":"Happy","size":187},{"text":"Sweet","size":187},{"text":"Road","size":186},{"text":"Wanna","size":186},{"text":"Bonus","size":184},{"text":"Hard","size":184},{"text":"2017","size":182},{"text":"Our","size":182},{"text":"Sharp","size":181},{"text":"Her","size":180},{"text":"Oh","size":180},{"text":"Presto","size":180},{"text":"Stop","size":180},{"text":"Best","size":178},{"text":"Dead","size":178},{"text":"John","size":177},{"text":"Solo","size":176},{"text":"Ride","size":173},{"text":"Shit","size":173},{"text":"Things","size":173},{"text":"Head","size":172},{"text":"Week","size":171},{"text":"Crazy","size":170},{"text":"Easy","size":170},{"text":"Into","size":169},{"text":"Matthew","size":167},{"text":"Always","size":166},{"text":"Blood","size":166}];
+      
+      // var frequency_list = [{"text":"study","size":40},{"text":"motion","size":15},{"text":"forces","size":10},{"text":"electricity","size":15},{"text":"movement","size":10},{"text":"relation","size":5},{"text":"things","size":10},{"text":"force","size":5},{"text":"ad","size":5},{"text":"energy","size":85},{"text":"living","size":5},{"text":"nonliving","size":5},{"text":"laws","size":15},{"text":"speed","size":45},{"text":"velocity","size":30},{"text":"define","size":5},{"text":"constraints","size":5},{"text":"universe","size":10},{"text":"physics","size":120},{"text":"describing","size":5},{"text":"matter","size":90},{"text":"physics-the","size":5},{"text":"world","size":10},{"text":"works","size":10},{"text":"science","size":70},{"text":"interactions","size":30},{"text":"studies","size":5},{"text":"properties","size":45},{"text":"nature","size":40},{"text":"branch","size":30},{"text":"concerned","size":25},{"text":"source","size":40},{"text":"google","size":10},{"text":"defintions","size":5},{"text":"two","size":15},{"text":"grouped","size":15},{"text":"traditional","size":15},{"text":"fields","size":15},{"text":"acoustics","size":15},{"text":"optics","size":15},{"text":"mechanics","size":20},{"text":"thermodynamics","size":15},{"text":"electromagnetism","size":15},{"text":"modern","size":15},{"text":"extensions","size":15},{"text":"thefreedictionary","size":15},{"text":"interaction","size":15},{"text":"org","size":25},{"text":"answers","size":5},{"text":"natural","size":15},{"text":"objects","size":5},{"text":"treats","size":10},{"text":"acting","size":5},{"text":"department","size":5},{"text":"gravitation","size":5},{"text":"heat","size":10},{"text":"light","size":10},{"text":"magnetism","size":10},{"text":"modify","size":5},{"text":"general","size":10},{"text":"bodies","size":5},{"text":"philosophy","size":5},{"text":"brainyquote","size":5},{"text":"words","size":5},{"text":"ph","size":5},{"text":"html","size":5},{"text":"lrl","size":5},{"text":"zgzmeylfwuy","size":5},{"text":"subject","size":5},{"text":"distinguished","size":5},{"text":"chemistry","size":5},{"text":"biology","size":5},{"text":"includes","size":5},{"text":"radiation","size":5},{"text":"sound","size":5},{"text":"structure","size":5},{"text":"atoms","size":5},{"text":"including","size":10},{"text":"atomic","size":10},{"text":"nuclear","size":10},{"text":"cryogenics","size":10},{"text":"solid-state","size":10},{"text":"particle","size":10},{"text":"plasma","size":10},{"text":"deals","size":5},{"text":"merriam-webster","size":5},{"text":"dictionary","size":10},{"text":"analysis","size":5},{"text":"conducted","size":5},{"text":"order","size":5},{"text":"understand","size":5},{"text":"behaves","size":5},{"text":"en","size":5},{"text":"wikipedia","size":5},{"text":"wiki","size":5},{"text":"physics-","size":5},{"text":"physical","size":5},{"text":"behaviour","size":5},{"text":"collinsdictionary","size":5},{"text":"english","size":5},{"text":"time","size":35},{"text":"distance","size":35},{"text":"wheels","size":5},{"text":"revelations","size":5},{"text":"minute","size":5},{"text":"acceleration","size":20},{"text":"torque","size":5},{"text":"wheel","size":5},{"text":"rotations","size":5},{"text":"resistance","size":5},{"text":"momentum","size":5},{"text":"measure","size":10},{"text":"direction","size":10},{"text":"car","size":5},{"text":"add","size":5},{"text":"traveled","size":5},{"text":"weight","size":5},{"text":"electrical","size":5},{"text":"power","size":5}];
+  
+  
+      // var color = d3.scale.linear()
+      //         .domain([12,15,18,20,35,45,65,85,100,200,300])
+      //         .range(["#333", "#484848", "#4e4e4e", "#626262", "#777", "#8c8c8c", "#a2a2a2", "#b9b9b9", "#d0d0d0", "#e7e7e7", "#fefefa", "#fff"]);
+  
+      var fill = d3.scale.category20c();
+  
+      d3.layout.cloud().size([1100, 600])
+              .timeInterval(20)
+              .words(frequency_list)
+              .spiral("archimedean")
+              .text(function(d) { return d.text.toLowerCase(); })
+              .fontSize(function(d) { return Math.round(Math.pow(d.size, 0.8)/5); })
+              // .rotate(function() { return ~~(Math.random() * 2) * 10; })
+              .rotate(0)
+              .font('Impact')
+              .on("end", draw)
+              .start();
+  
+      function draw(words) {
+        var div = d3.select("body").append("div")
+                    .attr("class", "tooltip")
+                    .style("opacity", 0);             
+
+          d3.select("body").append("svg")
+                  .attr("width", 1200)
+                  .attr("height", 800)
+                  .attr("class", "wordcloud")
+                  .append("g")
+                  // without the transform, words words would get cutoff to the left and top, they would
+                  // appear outside of the SVG area
+                  .attr("transform", "translate(600,300)")
+                  .selectAll("text")
+                  .data(words)
+                  .enter().append("text")
+                  .style("font-size", function(d) { return d.size + "px"; })
+                  // .style("fill", function(d, i) { return color(i); })
+                  .style("fill", function(d, i) { return fill(i); })
+                  .style("font-family", 'Impact')
+                  .attr("text-anchor", "middle")
+                  .attr("transform", function(d) {
+                      return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                  })
+                  .text(function(d) { return d.text.toLowerCase(); })
+                  
+                  .on('mouseover', function (d, i) {
+                      d3.select(this).transition()
+                        .duration('50')
+                        .attr('opacity', '.8');
+                        
+                        div.transition()
+                            .duration(50)
+                            .style("opacity", 1);
+                        let num = Math.round(Math.pow(d.size * 5, 1/0.8)).toString() + ' times';
+                        div.html(num)
+                           .style("left", (d3.event.pageX + 10) + "px")
+                           .style("top", (d3.event.pageY - 15) + "px");
+                    })
+                  
+                  .on('mouseout', function (d, i) {
+                      d3.select(this).transition()
+                        .duration('50')
+                        .attr('opacity', '1');
+                      div.transition()
+                        .duration('50')
+                        .style("opacity", 0);});
+
+      }
+  </script>
+  <!-- 
+  <div style="width: 140%;">
+      <div class="legend">
+          Commonly used words are larger and slightly faded in color.  Less common words are smaller and darker.
+      </div>
+  
+  </div> -->
+  
+
+</html>

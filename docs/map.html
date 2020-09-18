@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+
+    <div id="home" class="button_cont" align="center"><a class="example_e" href="add-website-here" target="_blank" rel="nofollow noopener">Home</a></div>
+
+
+
+    <script type="text/javascript">
+        document.getElementById("home").onclick = function () {
+            location.href = "index.html";
+        };
+    </script>
+
+
+    <style type="text/css">
+
+        body {
+           font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+              background-image: url('background1.jpg');
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size: cover;
+              text-align: center;
+              font-family: 'Verdana',sans-serif
+            }
+
+        .footer {
+            color: #777777;
+            font-size: 13px;
+            text-align: right;
+        }
+
+        #states path {
+          fill: rgb(105, 104, 104);
+          stroke: #fff;
+          stroke-width: 0.7px;
+          fill-opacity: .8;
+        }
+
+        circle {
+          fill: #ffd700;
+          fill-opacity: .6;
+          stroke: #fff;
+        }
+
+
+        circle {
+          stroke-width: 0.8px;
+          stroke: rgb(20, 20, 20);
+          opacity: .8
+        }
+        circle:hover {
+          stroke: yellow;
+        }
+
+      .example_e {
+        background: #191919;
+        border: 1px double #cccccc;
+        color: #eeeeee;
+        font-size: 21px;
+        font-family: sans-serif;
+        font-weight: 500;
+        padding: 6px;
+        width: 150px;
+        text-transform: uppercase;
+        border-radius: 30px;
+        display: inline-block;
+        transition: all 0.3s ease 0s;
+        margin: 5px;
+        }
+
+      .example_e:hover {
+        color: #404040 ;
+        font-weight: 700 ;
+        letter-spacing: 3px;
+        background: white;
+        -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+        transition: all 0.3s ease 0s;
+        }
+
+
+
+    </style>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+
+<script src="https://d3js.org/d3.v2.js"></script>
+
+</head>
+
+<body>
+<h2 style="color: white; font-size: 30px;">	
+Monthly Change of Stream Counts Around the World (2017)
+</h2>
+
+<div id="graph"></div>
+
+<p>
+<label for="month" style="color: white; font-size: 20px;">Month :</label>
+<input type="text" id="month" style="color:#5e5d5d; font-weight:bold; border-radius: 30px; text-align: center;
+                                     border: solid 1px rgb(122, 122, 122); height: 20px; width: 60px;font-size: 15px;" /> 
+
+
+<!-- 
+<input id="SearchTrack" type="text" value="Someone You Loved" size="20"
+			  style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+				              border: solid 1px rgb(122, 122, 122);
+				              height: 30px; 
+							  font-size:20px"/>
+ -->
+
+</p> 
+<div id="slider" style="width: 1000px;left: 100px; text-align: center;"></div>
+
+
+
+
+<script type="text/javascript">
+
+$("#slider").slider({
+	value:1,
+	min: 1,
+	max: 12,
+	step: 1,
+	slide: function( event, ui ) {
+		$("#month").val(ui.value);
+		redraw(ui.value.toString());
+	}
+});
+$("#month").val($("#slider").slider("value") );
+
+var w = 1200;
+var h = 500;
+
+var xy = d3.geo.equirectangular()
+          .scale(1000);
+
+var path = d3.geo.path()
+    .projection(xy);
+
+var svg = d3.select("#graph").insert("svg:svg")
+  .attr("align", "center")
+	.attr("width", w)
+  .attr("height", h)
+
+
+svg.append("rect")
+  .attr("x", 0)
+  .attr("width", "100%")
+  .attr("height", "100%")
+  .attr("fill", "white")
+  .attr("opacity", "0");
+
+var states = svg.append("svg:g")
+    .attr("id", "states");
+
+var circles = svg.append("svg:g")
+    .attr("id", "circles");
+
+var labels = svg.append("svg:g")
+    .attr("id", "labels");
+
+
+
+
+d3.json("world-countries.json", function(collection) {
+  states.selectAll("path")
+      .data(collection.features)
+    .enter().append("svg:path")
+      .attr("d", path)
+            .on("mouseover", function(d) {
+                d3.select(this).style("fill","#8fd400")
+                    .append("svg:title")
+                    .text(d.properties.name);})
+            .on("mouseout", function(d) {
+                d3.select(this).style("fill","#777777");})
+});
+
+
+
+var scalefactor=1./18000000. ;
+var s2 = 1./1800.;
+
+
+var valuesToShow = [100000, 50000, 10000]
+
+    var xCircle = 1080
+    var xLabel = 1150
+    svg
+      .selectAll("legend")
+      .data(valuesToShow)
+      .enter()
+      .append("circle")
+        .attr("cx", xCircle)
+        .attr("cy", function(d){ return  400-d*s2 } )
+        .attr("r", function(d){ return d*s2 })
+        .style("stroke", "rgb(65, 65, 65")
+        .style("fill", "#ffd700")
+
+    // Add legend: segments
+    svg
+      .selectAll("legend")
+      .data(valuesToShow)
+      .enter()
+      .append("line")
+        .attr('x1', function(d){ return xCircle + d*s2 } )
+        .attr('x2', xLabel)
+        .attr('y1', function(d){ return 400 - d*s2 } )
+        .attr('y2', function(d){ return 400 - d*s2 } )
+        .attr('stroke', 'white')
+        .style('stroke-dasharray', ('2,2'))
+
+     // Add legend: labels
+     svg
+      .selectAll("legend")
+      .data(valuesToShow)
+      .enter()
+      .append("text")
+        .attr('x', xLabel)
+        .attr('y', function(d){ return 400 - d*s2 } )
+        .text( function(d){ return d/1000000 } )
+        .style("font-size", 10)
+        .attr('alignment-baseline', 'middle')
+        .style('fill', 'white')
+
+    // Legend title
+    svg.append("text")
+      .attr('x', xCircle+10)
+      .attr("y", 430)
+      .text("Stream Counts (M)")
+      .attr("text-anchor", "middle")
+      .style('fill', 'white')
+
+d3.csv("out_3.csv", function(csv) {
+
+    //SeqColorScale.domain(d3.extent(csv, function (d) { return d["1"]; }));
+
+
+    var tooltip = d3.select("#graph")
+    .append("div")
+      .style("opacity", 0)	
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("background-color", "green")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("color", "white")
+      .style("pointer-events", "none")
+
+  // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+  var showTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+    tooltip
+      .style("opacity", 1)
+      .style("left", (d3.event.pageX) + "px")		
+      .style("top", (d3.event.pageY - 28) + "px")	
+      .html(d['Name'])
+  }
+  var hideTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+  circles.selectAll("circle")
+      .data(csv)
+    .enter()
+    .append("svg:circle")
+      .attr("cx", function(d, i) { return xy([+d["long"],+d["lat"]])[0]; })
+      .attr("cy", function(d, i) { return xy([+d["long"],+d["lat"]])[1]; })
+      .attr("r",  function(d) { return (+d["1"])*scalefactor; })
+      //.attr("fill", function (d) { return SeqColorScale(d["1"]); })
+      .attr("title",  function(d) { return d["Name"]+": "+Math.round(d["1"]); })
+      .on("mouseover", showTooltip )
+        .on("mouseleave", hideTooltip )
+            // .on("mouseover", function(d) {
+            //     d3.select(this).style("fill","#FC0");})
+            // .on("mouseout", function(d) {
+            //     d3.select(this).style("fill","steelblue");});
+
+
+});
+
+
+function redraw(month) {
+      circles.selectAll("circle")
+	  .transition()
+          .duration(1000).ease("linear")
+          .attr("r",  function(d) { return (+d[month])*scalefactor; })
+          .attr("title",  function(d) { return d["Name"]+": "+Math.round(d[month]); })
+          //.attr("fill", function (d) { return SeqColorScale(d["1"]); })
+
+      labels.selectAll("text")
+          .text(function(d) { return Math.round(d[month]); });
+}
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html, lang="en">
+	<head>
+		<!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+		<title>Smoothed D3.js Radar Chart</title> -->
+		<meta charset="utf-8">
+
+		<!-- Google fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+		<!-- button style -->
+		<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+		<!-- D3.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		
+       
+  
+        <div class="input-group">
+			<span style="color:white;font-family:'Verdana',sans-serif;font-size:20px;font-weight:450;line-height:20px; margin-right:5px;" >TRACK NAME :</span>
+			<input id="SearchTrack" type="text" value="Someone You Loved" size="20"
+			  style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+				              border: solid 1px rgb(122, 122, 122);
+				              height: 30px; 
+							  font-size:20px"/>
+
+<span style="color:white;font-family:'Verdana',sans-serif;font-size:20px;font-weight:450;line-height:20px;margin-right:5px;" >&nbsp &nbspARTIST NAME :</span>
+			<input id="SearchArtist" type="text" value="Lewis Capaldi" size="20"
+			  style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+				              border: solid 1px #6E6E6E;
+				              height: 30px; 
+							  font-size:20px" />
+
+			<span class="input-group-btn">
+			<button type="button"id="btn-show" 
+					style = "display: inline-block;
+				      background-color: #191919;
+				      border-radius: 30px;
+				      border: 1px double #cccccc;
+				      color: #eeeeee;
+				      text-align: center;
+				      font-size: 20px;
+				      padding: 5px;
+				      width: 200px;
+				      transition: all 0.1s;
+				      cursor: pointer;
+				      margin: 5px;">SHOW RADAR</button>
+			</span>
+        </div><!-- /input-group -->
+<br>
+        <div class="input-group">
+			<span style="color:white;font-family:'Verdana',sans-serif;font-size:20px;font-weight:450;line-height:20px; margin-right:5px;" >TRACK NAME 1 :</span>
+		    <input id="SearchTrack1" type="text" value="bad guy" size="20" 
+	            style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+		               border: solid 1px #6E6E6E;
+		               height: 30px; 
+		               font-size:20px" />
+
+<span style="color:white;font-family:'Verdana',sans-serif;font-size:20px;font-weight:450;line-height:20px; margin-right:5px;" >&nbsp &nbspARTIST NAME 1 :</span>
+		    <input id="SearchArtist1" type="text" value="Billie Eilish" size="20" 
+			    style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+				              border: solid 1px #6E6E6E;
+				              height: 26px; 
+				              font-size:20px" />
+	    </div>
+
+        <div class="input-group">
+		    <span style="color:white;font-family:'Verdana',sans-serif;font-size:20px;font-weight:450;line-height:20px; margin-right:5px;" >TRACK NAME 2 : </span>
+		    <input id="SearchTrack2" type="text" value="wish you were gay" size="20" 
+			    style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+				              border: solid 1px #6E6E6E;
+				              height: 30px; 
+				              font-size:20px" />
+
+<span style="color:white;font-family:'Verdana',sans-serif;font-size:20px;font-weight:450;line-height:20px; margin-right:5px;" >&nbsp &nbsp ARTIST NAME 2 : </span>
+		    <input id="SearchArtist2" type="text" value="Billie Eilish" size="20" 
+			    style="display: inline-block;background-color:white; border-radius: 30px;text-align: center; 
+				              border: solid 1px #6E6E6E;
+				              height: 30px; 
+				              font-size:20px" />
+
+		    <span class="input-group-btn">
+		       <button  type="button" id="btn-compare" 
+				       style = "display: inline-block;
+				      background-color: #191919;
+				      border-radius: 30px;
+				      border: 1px double #cccccc;
+				      color: #eeeeee;
+				      text-align: center;
+				      font-size: 20px;
+				      padding: 6px;
+				      width: 240px;
+				      transition: all 0.1s;
+				      cursor: pointer;
+				      margin: 5px;">COMPARE RADAR</button>
+		    </span>
+
+        </div><!-- /input-group -->
+
+		<!-- <button id="nextButton" class="float-left submit-button"  
+				style = "display: inline-block;
+				background-color: #191919;
+				border-radius: 30px;
+				border: 1px double #cccccc;
+				color: #eeeeee;
+				text-align: center;
+				font-size: 21px;
+				padding: 6px;
+				width: 150px;
+				transition: all 0.1s;
+				cursor: pointer;
+				
+				">Next</button> -->
+
+		<div id="home" class="button_cont" align="center"><a class="example_e" href="add-website-here" target="_blank" rel="nofollow noopener">Home</a></div>
+
+
+
+		<script type="text/javascript">
+		    document.getElementById("home").onclick = function () {
+		        location.href = "index.html";
+		    };
+		</script>
+		
+		<style>
+			
+
+			body {
+				font-family: 'Open Sans', sans-serif;
+				font-size: 18px;
+				font-weight: 300;
+				fill: #242424;
+				text-align: center;
+				/* text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; */
+				cursor: default;
+			}
+
+			input {
+				color: #3e3e3e;
+			}
+
+
+			
+			.legend {
+				font-family: 'Raleway', sans-serif;
+				fill: #333333;
+			}
+			
+			.tooltip {
+				fill: #333333;
+			}
+    
+            body {
+				  background-image: url('background1.jpg');
+				  background-repeat: no-repeat;
+				  background-attachment: fixed;
+				  background-size: cover;
+				}
+
+		    .example_e {
+				background: #191919;
+				border: 1px double #cccccc;
+				color: #eeeeee;
+				font-size: 21px;
+				font-family: sans-serif;
+				font-weight: 500;
+				padding: 6px;
+				width: 150px;
+				text-transform: uppercase;
+				border-radius: 30px;
+				display: inline-block;
+				transition: all 0.3s ease 0s;
+				margin: 5px;
+				}
+
+			.example_e:hover {
+				color: #404040 ;
+				font-weight: 700 ;
+				letter-spacing: 3px;
+				background: white;
+				-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+				-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+				transition: all 0.3s ease 0s;
+				}
+
+		</style>
+	
+	</head>
+	<body>
+
+		<div class="radarChart"></div>
+
+		<script src="radar.js"></script>	
+		<script>
+      
+ 
+			////////////////////////////////////////////////////////////// 
+            //margin
+			var margin = {top: 160, right: 140, bottom: 160, left: 140},
+				width = Math.min(1000, window.innerWidth - 10) - margin.left - margin.right,
+				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
+
+   
+			function Show() { 
+
+				// get input data
+			    var track = document.getElementById("SearchTrack").value.toLowerCase();
+			    var artist = document.getElementById("SearchArtist").value.toLowerCase();
+
+                //read csv file
+			    d3.csv("SpotifyAudioFeaturesApril2019.csv", function(error,data) {
+		              if(error) throw error;
+		              console.log(data);
+     
+                    
+                    //get 6 features for a specific song
+		            var data1 = data.filter(function(d){return d.track_name.toLowerCase() == track &&  d.artist_name.toLowerCase() == artist});
+		            
+	    
+		            var danceability1 = data1.map(function(d) { return +d.danceability});   
+		            var energy1 = data1.map(function(d) { return +d.energy}); 
+		            var liveness1 = data1.map(function(d) { return +d.liveness}); 
+		            var instrumentalness1 = data1.map(function(d) { return +d.instrumentalness}); 
+		            var speechiness1 = data1.map(function(d) { return +d.speechiness}); 
+		            var valence1 = data1.map(function(d) { return +d.valence}); 
+
+		            var data_show = [[{axis:"Danceability",value:danceability1},
+								{axis:"Energy",value:energy1},
+								{axis:"Liveness",value:liveness1},
+								{axis:"Instrumentalness",value:instrumentalness1},
+								{axis:"Speechiness",value:speechiness1},
+								{axis:"Valence",value:valence1}]]
+
+
+					//////////////////// Draw the Chart ////////////////////////// 
+
+					var color = d3.scale.ordinal()
+						.range(["#8a3ebe"]);
+						
+					var radarChartOptions = {
+					  w: width,
+					  h: height,
+					  margin: margin,
+					  maxValue: 0.5,
+					  levels: 5,
+					  roundStrokes: true,
+					  color: color,
+					  tracklist: [track]
+					};
+                    
+
+                    // console.log("input::_>>>>>")
+					// console.log(track)
+				    //Call function to draw the Radar chart
+					RadarChart(".radarChart", data_show, radarChartOptions);	
+				});
+
+			}
+
+            
+            // show radar button
+			var btn_show = document.getElementById("btn-show");
+			btn_show.addEventListener("click",  Show);
+
+
+			function Compare() {
+                
+                // get input data
+				var track1 = document.getElementById("SearchTrack1").value.toLowerCase();
+		        var track2 = document.getElementById("SearchTrack2").value.toLowerCase();
+		        var artist1 = document.getElementById("SearchArtist1").value.toLowerCase();
+			    var artist2 = document.getElementById("SearchArtist2").value.toLowerCase();
+		        //72var name = [track1,track2]
+                
+                //read csv file
+				d3.csv("SpotifyAudioFeaturesApril2019.csv", function(error,data) {
+			              if(error) throw error;
+			              console.log(data);       
+                    
+                    //get 6 features for a specific song
+		            var data2 = data.filter(function(d){return d.track_name.toLowerCase() == track1 &&  d.artist_name.toLowerCase() == artist1});
+		            var data3 = data.filter(function(d){return d.track_name.toLowerCase() == track2 &&  d.artist_name.toLowerCase()== artist2});
+	 
+
+		            var danceability2 = data2.map(function(d) { return +d.danceability});   
+		            var energy2 = data2.map(function(d) { return +d.energy}); 
+		            var liveness2 = data2.map(function(d) { return +d.liveness}); 
+		            var instrumentalness2 = data2.map(function(d) { return +d.instrumentalness}); 
+		            var speechiness2 = data2.map(function(d) { return +d.speechiness}); 
+		            var valence2 = data2.map(function(d) { return +d.valence}); 
+                    
+                    var danceability3 = data3.map(function(d) { return +d.danceability});   
+		            var energy3 = data3.map(function(d) { return +d.energy}); 
+		            var liveness3 = data3.map(function(d) { return +d.liveness}); 
+		            var instrumentalness3 = data3.map(function(d) { return +d.instrumentalness}); 
+		            var speechiness3 = data3.map(function(d) { return +d.speechiness}); 
+		            var valence3 = data3.map(function(d) { return +d.valence}); 
+		            
+					var data_com = [
+							  [{axis:"Danceability",value:danceability2},
+								{axis:"Energy",value:energy2},
+								{axis:"Liveness",value:liveness2},
+								{axis:"Instrumentalness",value:instrumentalness2},
+								{axis:"Speechiness",value:speechiness2},
+								{axis:"Valence",value:valence2}
+								],[
+								{axis:"Danceability",value:danceability3},
+								{axis:"Energy",value:energy3},
+								{axis:"Liveness",value:liveness3},
+								{axis:"Instrumentalness",value:instrumentalness3},
+								{axis:"Speechiness",value:speechiness3},
+								{axis:"Valence",value:valence3}]
+							];
+
+
+					var color = d3.scale.ordinal()
+						.range(["#1662ca","#f5c71a"]);
+						
+					var radarChartOptions = {
+					  w: width,
+					  h: height,
+					  margin: margin,
+					  maxValue: 0.5,
+					  levels: 5,
+					  roundStrokes: true,
+					  color: color,
+					  tracklist: [track1, track2]
+					};
+				    //Call function to draw the Radar chart
+					RadarChart(".radarChart", data_com, radarChartOptions);
+
+			    });
+			}
+
+            
+            //compare button
+			var btn_com = document.getElementById("btn-compare");
+			btn_com.addEventListener("click",  Compare);
+            
+            	
+	
+		</script>
+	</body>
+</html>

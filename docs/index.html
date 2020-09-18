@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html, lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/ >
+
+		<!-- Google fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+		
+		
+
+		<div class="my-block">
+	 		Discover Attributes for <br/>
+            Top Spotify Songs from <br/>
+            2010 to 2019</div>
+
+        <!-- <div id="Button"class="button_cont" align="center"><a class="example_e" href="add-website-here" target="_blank" rel="nofollow noopener">Enter</a></div>
+         -->
+
+   
+	    <div style="text-align: center">
+	    	<button id="radar" class="glow-on-hover" type="button">RADAR</button>
+        
+	    	<button id="bubble" class="glow-on-hover" type="button">BUBBLE</button>
+ 
+	    	<button id="map" class="glow-on-hover" type="button">MAP</button>
+
+	    	<button id="cloud" class="glow-on-hover" type="button">CLOUD</button>
+        </div>
+
+        <script type="text/javascript">
+		    document.getElementById("radar").onclick = function () {
+		        location.href = "spotify.html";
+		    };
+
+		    document.getElementById("bubble").onclick = function () {
+		        location.href = "bubble.html";
+		    };
+
+		    document.getElementById("map").onclick = function () {
+		        location.href = "map.html";
+		    };
+
+		    document.getElementById("cloud").onclick = function () {
+		        location.href = "wordcloud.html";
+		    };
+		</script>
+
+
+		
+		<style>
+
+		    body {
+				  background-image: url('homepage.jpg');
+				  background-repeat: no-repeat;
+				  background-attachment: fixed;
+				  background-size: cover;
+				}
+			
+			.my-block {
+	            text-align: center;
+	            vertical-align: middle;
+	            font-size: 65px;
+	            font-weight: bold;
+	            font-family:'Verdana';
+	            color: white;
+	            margin: 100px;
+            } 
+
+
+            body {
+            	background-image: url('homepage.jpg');
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: cover;
+			    margin: 0;
+			    padding: 0;
+			    width: 100%;
+			    height: 100vh;
+			    display: flex;
+			    flex-direction: row;
+			    justify-content: center;
+			    align-items: center;
+			}
+
+            .glow-on-hover {
+            	font-size: 21px;
+			    width: 220px;
+			    height: 50px;
+			    border: none;
+			    outline: none;
+			    color: #fff;
+			    background: black;
+			    cursor: pointer;
+			    position: relative;
+			    z-index: 0;
+			    border-radius:30px;
+				border: 1px double #cccccc;
+				opacity: 0.85;
+			}
+
+			.glow-on-hover:before {
+			    content: '';
+			    background: linear-gradient(45deg, #e6171788, #e06e11f3, #fcf823c5, #5eee25c4, #2af5d3a1, #2546ebad, #923cee86, #d41ead83, #e6171788);
+			    position: absolute;
+			    top: -2px;
+			    left:-2px;
+			    background-size: 400%;
+			    z-index: -1;
+			    filter: blur(5px);
+			    width: calc(100% + 4px);
+			    height: calc(100% + 4px);
+			    animation: glowing 20s linear infinite;
+			    opacity: 0;
+			    transition: opacity .3s ease-in-out;
+			    border-radius: 30px;
+			}
+
+			.glow-on-hover:active {
+			    color: #191919
+			}
+
+			.glow-on-hover:active:after {
+			    background: transparent;
+			}
+
+			.glow-on-hover:hover:before {
+			    opacity: 1;
+			}
+
+			.glow-on-hover:after {
+			    z-index: -1;
+			    content: '';
+			    position: absolute;
+			    width: 100%;
+			    height: 100%;
+			    background: #111;
+			    left: 0;
+			    top: 0;
+			    border-radius: 30px;
+			}
+
+			@keyframes glowing {
+			    0% { background-position: 0 0; }
+			    50% { background-position: 400% 0; }
+			    100% { background-position: 0 0; }
+			}
+
+		  
+		</style>
+
+	</head>
+
+
+
+</html>
